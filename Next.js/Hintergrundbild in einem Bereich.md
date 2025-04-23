@@ -123,3 +123,26 @@ Wir entfernen die Hintergrundbild-Klassen aus dem `app/layout.js` (oder stellen 
 7.  Die Feature Cards sollten ihren weißen Hintergrund behalten und gut lesbar sein.
 
 Jetzt hast du das Hintergrundbild gezielt nur für den gewünschten Abschnitt gesetzt!
+
+
+
+** Antwort auf Patrick's Frage
+
+// app/page.js
+// ...
+<section
+  id="features"
+  className="
+    py-16
+    bg-[url('/features-bg.jpg')]
+    bg-contain              // <-- Ersetze bg-cover hiermit
+    bg-center               // Zentrum beibehalten (oder bg-top, bg-bottom etc.)
+    bg-no-repeat            // Verhindert Kacheln
+  "
+>
+  <div className="container mx-auto px-4 relative z-10">
+    {/* ... Überschrift (Textfarbe prüfen!) ... */}
+    {/* ... Feature Cards ... */}
+  </div>
+</section>
+// ...
