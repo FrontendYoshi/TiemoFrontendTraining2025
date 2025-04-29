@@ -111,9 +111,9 @@ Nehmen Sie sich Zeit, die Typisierungen korrekt anzuwenden und beobachten Sie, w
 
 
 
-TypeScript
 
-```
+
+```TypeScript
 // 1. Erstellen Sie ein Benutzerobjekt mit Inline-Typ-Annotation
 // Wir definieren hier direkt die Form des Objekts, das currentUser sein wird
 let currentUser: {
