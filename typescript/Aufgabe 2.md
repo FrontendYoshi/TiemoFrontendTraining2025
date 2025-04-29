@@ -105,3 +105,97 @@ Kurse: [Liste der Kursnamen, z.B. Mathematik, Informatik, Englisch]
 Nehmen Sie sich Zeit, die Typisierungen korrekt anzuwenden und beobachten Sie, wie TypeScript Sie dabei unterstützt, Fehler frühzeitig zu erkennen.
 
 ---
+
+
+## Lösung
+
+
+
+TypeScript
+
+```
+// 1. Erstellen Sie ein Benutzerobjekt mit Inline-Typ-Annotation
+// Wir definieren hier direkt die Form des Objekts, das currentUser sein wird
+let currentUser: {
+  name: string;
+  age: number;
+  isStudent: boolean;
+  score: number;
+} = {
+  name: "Anna Musterfrau",
+  age: 22,
+  isStudent: true,
+  score: 95.5,
+};
+
+// 2. Erstellen Sie ein Array von Kursen mit expliziter Typ-Annotation
+// Wir legen fest, dass dieses Array nur Strings enthalten darf
+let userCourses: string[] = ["Mathematik", "Informatik", "Englisch"];
+
+// 3. Erstellen Sie eine Funktion zur Anzeige der Benutzerdaten
+// Wir typisieren die Parameter (user hat die gleiche Form wie currentUser, courses ist ein string[])
+// und den Rückgabetyp (void, da die Funktion nichts zurückgibt)
+function displayUserInfo(user: { name: string; age: number; isStudent: boolean; score: number }, courses: string[]): void {
+  console.log("Benutzerinformationen:");
+  // Ausgabe ohne Template-Literale
+  console.log("  Name: " + user.name);
+  console.log("  Alter: " + user.age);
+  console.log("  Ist Student: " + user.isStudent);
+  console.log("  Punktzahl: " + user.score);
+
+  console.log("Kurse:");
+  // Ausgabe der Kurse (Weiterhin über das Array iterieren, aber Ausgabe ohne $)
+  courses.forEach(course => {
+      console.log("  - " + course);
+  });
+  // Oder einfach: console.log("  ", courses); // Diese Zeile verwendet keine $
+}
+
+// 4. Rufen Sie die Funktion auf
+displayUserInfo(currentUser, userCourses);
+
+// --- Optional: Experimente (auskommentiert, um keine Fehler zu verursachen) ---
+
+// Beispiel für Zuweisung eines falschen Typs zum Array
+// userCourses.push(123); // TypeScript FEHLER: Argument vom Typ 'number' kann Parameter vom Typ 'string' nicht zugewiesen werden.
+
+// Beispiel für ein Objekt mit falschem Eigenschaftstyp
+// let anotherUserWithErrors: { name: string; age: number; isStudent: boolean; score: number } = {
+//     name: "Bob",
+//     age: "dreißig", // TypeScript FEHLER: Typ 'string' kann Typ 'number' nicht zugewiesen werden.
+//     isStudent: false,
+//     score: 80
+// };
+
+// Beispiel für den Aufruf der Funktion mit falschen Argumenttypen
+// displayUserInfo(userCourses, currentUser); // TypeScript FEHLER: Argumente passen nicht zu den Parametertypen
+
+// --- Ende der Experimente ---
+```
+
+**So verwenden Sie die Lösung:**
+
+1. Kopieren Sie den obigen Code.
+2. Fügen Sie ihn in Ihre `.ts`-Datei ein und speichern Sie die Datei.
+3. Öffnen Sie Ihr Terminal im Root-Ordner Ihres Projekts.
+4. Kompilieren Sie den Code mit:
+    
+    Bash
+    
+    ```
+    npx tsc
+    ```
+    
+    Wenn Sie die optionalen Fehler-Experimente _nicht_ auskommentiert haben, wird der Compiler Fehlermeldungen anzeigen. Kommentieren Sie diese Zeilen aus, um die Kompilierung erfolgreich durchzuführen.
+5. Führen Sie den kompilierten JavaScript-Code aus:
+    
+    Bash
+    
+    ```
+    node dist/index.js
+    ```
+    
+
+Die Ausgabe in Ihrer Konsole wird identisch sein, aber der Code, der diese Ausgabe erzeugt, verwendet nun String-Verkettung statt Template-Literale.
+
+---
